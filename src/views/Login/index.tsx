@@ -2,7 +2,6 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { Input, Space, Button, message } from "antd";
 import styles from "./login.module.scss";
 import initLoginBg from "./init";
-import "antd/dist/antd.css";
 import "./login.less";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +11,7 @@ const Login: React.FC = () => {
   // 加载完这个组件之后，加载背景
   useEffect(() => {
     initLoginBg();
-    window.onreset = function () {
+    window.onresize = function () {
       initLoginBg();
     };
     getCaptchaImg();
@@ -22,7 +21,7 @@ const Login: React.FC = () => {
   const [passwordVal, setPasswordVal] = useState("");
   const [captchaVal, setCaptchaVal] = useState("");
   // 获取验证码图片信息
-  const [captchaImg, setCaptchaImg] = useState("/src/assets/image/code.png");
+  const [captchaImg, setCaptchaImg] = useState("");
   const usernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
@@ -75,7 +74,7 @@ const Login: React.FC = () => {
         {/* 标题部分 */}
         <div className={styles.title}>
           <h1>悍匪ly&nbsp;·&nbsp;通用后台管理</h1>
-          <p>Strive Everyday</p>
+          <p> strive everyday </p>
         </div>
         {/* form表单 */}
         <div className="form">
