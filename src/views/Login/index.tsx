@@ -5,7 +5,7 @@ import initLoginBg from "./init";
 import "./login.less";
 import { useNavigate } from "react-router-dom";
 
-import { CaptchaAPI, LoginAPI } from "@/request/api";
+import { LoginAPI } from "@/request/api";
 
 const Login: React.FC = () => {
   // 加载完这个组件之后，加载背景
@@ -14,16 +14,16 @@ const Login: React.FC = () => {
     window.onresize = function () {
       initLoginBg();
     };
-    getCaptchaImg();
+    // getCaptchaImg();
   }, []);
   const navigateTo = useNavigate();
-  const [usernameVal, setUsername] = useState("");
+  const [accountVal, setAccount] = useState("");
   const [passwordVal, setPasswordVal] = useState("");
   const [captchaVal, setCaptchaVal] = useState("");
   // 获取验证码图片信息
-  const [captchaImg, setCaptchaImg] = useState("");
+  // const [captchaImg, setCaptchaImg] = useState("");
   const usernameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+    setAccount(e.target.value);
   };
   const passwordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPasswordVal(e.target.value);
@@ -34,37 +34,40 @@ const Login: React.FC = () => {
   // 登录按钮
   const goToLogin = async () => {
     // 验证是否为空值
-    if (!usernameVal.trim() || !passwordVal.trim() || !captchaVal.trim()) {
+    if (!accountVal.trim() || !passwordVal.trim() || !captchaVal.trim()) {
       message.warning("请完整输入信息!");
       return;
     }
-    const res = await LoginAPI({
-      username: usernameVal,
-      password: passwordVal,
-      code: captchaVal,
-      uuid: localStorage.getItem("uuid") as string,
-    });
-    if (res.code === 200) {
-      console.log(res);
-      //  1.提示登录成功
-      message.success("登录成功!", 3);
-      //  2.保存token
-      localStorage.setItem("ly-react-management-token", res.token);
-      //  3.跳转/page1
-      navigateTo("/page1");
-      //  4.删除本地保存的uuid
-      localStorage.removeItem("uuid");
+    if (captchaVal.toLowerCase() !== "Hxsc5p".toLowerCase()) {
+      message.warning("验证码错误!");
+      return;
     }
+    const res = await LoginAPI({
+      account: accountVal,
+      password: passwordVal,
+    });
+    console.log(res);
+    // if (res.code === 200) {
+    //   console.log(res);
+    //   //  1.提示登录成功
+    //   message.success("登录成功!", 3);
+    //   //  2.保存token
+    //   localStorage.setItem("ly-react-management-token", res.token);
+    //   //  3.跳转/page1
+    //   navigateTo("/page1");
+    //   //  4.删除本地保存的uuid
+    //   localStorage.removeItem("uuid");
+    // }
   };
 
-  // 获取验证码
-  const getCaptchaImg = async () => {
-    const res = await CaptchaAPI();
-    if (res.code !== 200) return;
-    let str: string = "data:image/gif;base64,";
-    setCaptchaImg(str + res.img);
-    localStorage.setItem("uuid", res.uuid);
-  };
+  // // 获取验证码
+  // const getCaptchaImg = async () => {
+  //   const res = await CaptchaAPI();
+  //   if (res.code !== 200) return;
+  //   let str: string = "data:image/gif;base64,";
+  //   setCaptchaImg(str + res.img);
+  //   localStorage.setItem("uuid", res.uuid);
+  // };
 
   return (
     <div className={styles.loginPage}>
@@ -84,8 +87,8 @@ const Login: React.FC = () => {
             <Input.Password placeholder="密码" onChange={passwordChange} />
             <div className="captchaBox">
               <Input placeholder="验证码" onChange={captchaChange} />
-              <div className="captchaImg" onClick={getCaptchaImg}>
-                <img src={captchaImg} height="38" />
+              <div className="captchaImg">
+                <img src="/src/assets/image/code.png" height="38" />
               </div>
             </div>
             <Button type="primary" onClick={goToLogin} block>

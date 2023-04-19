@@ -14,53 +14,19 @@ type MenuItem = Required<MenuProps>["items"][number];
 // 登录请求道数据之后，就可以跟items这个数据进行匹配
 const items: MenuItem[] = [
   {
-    label: "Option 1",
+    label: "首页",
     key: "/page1",
     icon: <PieChartOutlined />,
   },
   {
-    label: "Option 2",
-    key: "/page2",
-    icon: <DesktopOutlined />,
-  },
-  {
-    label: "Option 3",
-    key: "page3",
+    label: "用户管理",
+    key: "/user",
     icon: <UserOutlined />,
-    children: [
-      {
-        label: "Tom",
-        key: "/page3/page301",
-      },
-      {
-        label: "Bill",
-        key: "/page3/page302",
-      },
-      {
-        label: "Alex",
-        key: "/page3/page303",
-      },
-    ],
   },
   {
-    label: "Option 4",
-    key: "page4",
-    icon: <TeamOutlined />,
-    children: [
-      {
-        label: "Tom",
-        key: "/page4/page401",
-      },
-      {
-        label: "Bill",
-        key: "/page4/page402",
-      },
-    ],
-  },
-  {
-    label: "Option 5",
-    key: "/page5",
-    icon: <FileOutlined />,
+    label: "响应式",
+    key: "/responsive",
+    icon: <DesktopOutlined />,
   },
 ];
 

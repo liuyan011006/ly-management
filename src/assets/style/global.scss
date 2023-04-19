@@ -1,8 +1,9 @@
-$color:  #F90;
+$color:  #fff;
 body{
   background-color: $color;
   // 禁用文件选中
   user-select: none;
+  overflow-x: hidden;
 }
 
 img{
