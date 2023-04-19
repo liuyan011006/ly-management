@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 // 样式初始化一般放在最前面
 import "reset-css";

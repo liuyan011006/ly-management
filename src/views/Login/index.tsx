@@ -2,7 +2,6 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { Input, Space, Button, message } from "antd";
 import styles from "./login.module.scss";
 import initLoginBg from "./init";
-import "antd/dist/antd.css";
 import "./login.less";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +11,7 @@ const Login: React.FC = () => {
   // 加载完这个组件之后，加载背景
   useEffect(() => {
     initLoginBg();
-    window.onreset = function () {
+    window.onresize = function () {
       initLoginBg();
     };
     getCaptchaImg();

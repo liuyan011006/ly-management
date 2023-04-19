@@ -7,7 +7,6 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
-import { ItemType } from "antd/lib/menu/hooks/useItems";
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 

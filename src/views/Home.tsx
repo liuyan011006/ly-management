@@ -28,7 +28,7 @@ const Home: React.FC = () => {
           style={{ paddingLeft: "16px" }}
         >
           {/* 面包屑 */}
-          <Breadcrumb style={{ lineHeight: "64px" }}>
+          <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Bill</Breadcrumb.Item>
           </Breadcrumb>
